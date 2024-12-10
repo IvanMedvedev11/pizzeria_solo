@@ -1,6 +1,7 @@
 from view import *
 from model import *
 def pizzeria():
+    password = 'негрогарсия'
     logs = load_file('logs.json')
     log = {'name': '', 'number': '', 'order': '', 'errors': set()}
     sizes = load_file('sizes.json')
@@ -11,17 +12,85 @@ def pizzeria():
     surname = input("Введите фамилию: ")
     age = input("Введите возраст: ")
     number = input("Введите номер телефона: ")
+    user_password = input("Введите пароль: ")
     users = load_file('users.json')
     user = {'name': name, 'surname': surname, 'age': age, 'number': number}
-    log['name'] = name
-    log['number'] = number
     for data in users:
         if data['number'] == user['number']:
             print("Пользователь уже существует")
             break
     else:
+        print("Вы успешно зарегистрированы")
         users.append(user)
         save_to_file('users.json', users)
+    if user_password == password:
+        act = input("Выберите действие: 1 - посмотреть логи, 2 - изменить кол-во пицц, 3 - изменить кол-во продуктов, 4 - изменить стоимость пицц, 5 - изменить стоимость продуктов: ")
+        if act not in ['1', '2', '3', '4', '5']:
+            print("Не повезло")
+        elif act == '1':
+            print(logs)
+        elif act == '2':
+            print(pizzas)
+            name = input("Введите название пиццы: ")
+            if find_element(name, pizzas) == "Error":
+                print("Пиццы не существует")
+                errors.add(3)
+            else:
+                try:
+                    cnt = int(input("Установите кол-во пицц: "))
+                except ValueError:
+                    print("Не повезло")
+                    errors.add(2)
+                else:
+                    pizzas[pizzas.index(find_element(name, pizzas))]['count'] = cnt
+                    save_to_file('menu.json', pizzas)
+        elif act == '3':
+            print(products)
+            name = input("Введите название продукта: ")
+            if find_element(name, products) == "Error":
+                print("Продукта не существует")
+                errors.add(3)
+            else:
+                try:
+                    cnt = int(input("Установите кол-во продуктов: "))
+                except ValueError:
+                    print("Не повезло")
+                    errors.add(2)
+                else:
+                    products[products.index(find_element(name, products))]['count'] = cnt
+                    save_to_file('products.json', products)
+        elif act == '4':
+            print(pizzas)
+            name = input("Введите название пиццы: ")
+            if find_element(name, pizzas) == "Error":
+                print("Пиццы не существует")
+                errors.add(3)
+            else:
+                try:
+                    prc = int(input("Установите цену пиццы: "))
+                except ValueError:
+                    print("Не повезло")
+                    errors.add(2)
+                else:
+                    pizzas[pizzas.index(find_element(name, pizzas))]['price'] = prc
+                    save_to_file('menu.json', pizzas)
+        elif act == '5':
+            print(products)
+            name = input("Введите название продукта: ")
+            if find_element(name, products) == "Error":
+                print("Продукта не существует")
+                errors.add(3)
+            else:
+                try:
+                    prc = int(input("Установите цену продуктов: "))
+                except ValueError:
+                    print("Не повезло")
+                    errors.add(2)
+                else:
+                    products[products.index(find_element(name, products))]['price'] = prc
+                    save_to_file('products.json', products)
+    log['name'] = name
+    log['number'] = number
     pizzas_name = [pizza['name'] for pizza in pizzas]
     show_menu(pizzas_name)
     user_pizzas = []

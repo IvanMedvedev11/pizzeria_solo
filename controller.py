@@ -1,7 +1,8 @@
 from view import *
 from model import *
+from password import admin
 def pizzeria():
-    password = 'пассворд'
+    password = admin
     logs = load_file('logs.json')
     log = {'name': '', 'number': '', 'order': '', 'errors': set()}
     sizes = load_file('sizes.json')

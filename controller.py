@@ -1,7 +1,7 @@
 from view import *
 from model import *
 def pizzeria():
-    password = 'негрогарсия'
+    password = 'пассворд'
     logs = load_file('logs.json')
     log = {'name': '', 'number': '', 'order': '', 'errors': set()}
     sizes = load_file('sizes.json')

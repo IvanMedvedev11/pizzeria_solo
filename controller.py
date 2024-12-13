@@ -167,10 +167,7 @@ def pizzeria():
     try:
         user_summ = int(input("Внесите сумму: "))
         if user_summ < pizzas_summ:
-            print("Ты теперь должник")
-            change = "По роже"
-            errors.add(1)
-            show_check(user_pizzas, pizzas_summ, change)
+            raise ValueError
     except ValueError:
         print("Ты теперь должник")
         change = "По роже"

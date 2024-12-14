@@ -13,7 +13,7 @@ def pizzeria():
     surname = input("Введите фамилию: ")
     while True:
         try:
-            age = input("Введите возраст: ")
+            age = int(input("Введите возраст: "))
             if age < 1 or age > 130:
                 raise ValueError
         except ValueError:

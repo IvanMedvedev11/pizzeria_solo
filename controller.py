@@ -34,8 +34,8 @@ def pizzeria():
         users.append(user)
         save_to_file('users.json', users)
     if user_password == password:
-        act = input("Выберите действие: 1 - посмотреть логи, 2 - изменить кол-во пицц, 3 - изменить кол-во продуктов, 4 - изменить стоимость пицц, 5 - изменить стоимость продуктов: ")
-        if act not in ['1', '2', '3', '4', '5']:
+        act = input("Выберите действие: 1 - посмотреть логи, 2 - изменить кол-во пицц, 3 - изменить кол-во продуктов, 4 - изменить стоимость пицц, 5 - изменить стоимость продуктов, 6 - очистить логи: ")
+        if act not in ['1', '2', '3', '4', '5', '6']:
             print("Не повезло")
         elif act == '1':
             print(logs)
@@ -99,6 +99,8 @@ def pizzeria():
                 else:
                     products[products.index(find_element(name, products))]['price'] = prc
                     save_to_file('products.json', products)
+        elif act == '6':
+            logs = []
     log['name'] = name
     log['number'] = number
     pizzas_name = [pizza['name'] for pizza in pizzas]
@@ -126,7 +128,7 @@ def pizzeria():
                 else:
                     try:
                         product_count = int(input(f'Сколько {product_name} вы хотите добавить: '))
-                        if product_count > 20:
+                        if product_count > 20 or product_count < 1:
                             print("С ума сошёл?")
                             errors.add(1)
                             continue
@@ -152,7 +154,7 @@ def pizzeria():
         else:
             try:
                 pizza_count = int(input(f'Сколько {pizza_name} вы хотите взять: '))
-                if pizza_count > 20:
+                if pizza_count > 20 or pizza_count < 1:
                     print("С ума сошёл?")
                     errors.add(1)
                     continue

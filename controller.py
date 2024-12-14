@@ -11,7 +11,16 @@ def pizzeria():
     products = load_file('products.json')
     name = input("Введите имя: ")
     surname = input("Введите фамилию: ")
-    age = input("Введите возраст: ")
+    while True:
+        try:
+            age = input("Введите возраст: ")
+            if age < 1 or age > 130:
+                raise ValueError
+        except ValueError:
+            print("Введите правильный возраст")
+            errors.add(2)
+        else:
+            break
     number = input("Введите номер телефона: ")
     user_password = input("Введите пароль: ")
     users = load_file('users.json')
